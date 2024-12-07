@@ -5,7 +5,7 @@
             <h1>Inventory Management System</h1>
             <a href="/items/add" class="btn btn-primary btn-lg">Add Product</a>
         </div>
-        <div class="pt-5">
+    <div class="pt-5">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -28,7 +28,7 @@
                         <td class="py-4"><%= item.quantity %></td>
                         <td class="py-4"><%= item.price %></td>
                         <td class="py-4"><%= item.description %></td>
-                        <td class="py-4"><%= item.createdAt %></td>
+                        <td class="py-4"><%- moment(item.createdAt).format( 'MM/DD/YYYY') %></td>
                         <td class="py-4">
                             <a href="/items/<%= item.id %>" class="btn btn-info">View</a>
                             <button type="button" class="btn btn-primary">Edit</button>
@@ -39,7 +39,7 @@
                 </tbody>
                 <% } %>
             </table>
-        </div>
+        </div> 
     </div>
     
 
