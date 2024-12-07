@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const itemRoutes = require("./routes/itemRoutes");
 
 const app = express();
@@ -8,6 +9,9 @@ app.set("view engine", "ejs");
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Override
+app.use(methodOverride("_method"));
 
 // Connect mongodb using Mongoose
 mongoose

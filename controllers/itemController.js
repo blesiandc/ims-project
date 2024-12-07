@@ -25,7 +25,7 @@ exports.addItem = async (req, res) => {
   try {
     const item = new Items({ name, category, quantity, price, description });
     await item.save();
-    res.status(201).json({
+    res.status(200).json({
       message: "Item created successfully.",
     });
   } catch (err) {
@@ -35,28 +35,36 @@ exports.addItem = async (req, res) => {
   }
 };
 
-// exports.updateItem = async (req, res) => {
-//   const id = req.params.id;
-//   const { name, category, quantity, price, description } = req.body;
+exports.editForm = async (req, res) => {
+  try {
+    const item = await Items.findById(req.params.id);
+    if (!item) {
+      return res.status(404).send("Item not found");
+    }
+    res.render("edit", { item });
+  } catch (err) {
+    res.status(500).json({ err: "An error occurred while fetching the item." });
+  }
+};
 
-//   try {
-//     const updateItem = await Items.findByIdAndUpdate(
-//       id,
-//       { name, category, quantity, price, description },
-//       { new: true }
-//     );
+exports.updateItem = async (req, res) => {
+  const id = req.params.id;
+  const { name, category, quantity, price, description } = req.body;
 
-//     if (!id) {
-//       return res.status(404).json({ error: "Product not found" });
-//     }
+  try {
+    const updatedItem = await Items.findByIdAndUpdate(
+      id,
+      { name, category, quantity, price, description },
+      { new: true }
+    );
 
-//     res.status(201).json({
-//       message: "Item updated successfully.",
-//       updateItem,
-//     });
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .json({ err: "An error occurred while editing the product." });
-//   }
-// };
+    res.status(200).json({
+      message: "Item updated successfully.",
+      item: updatedItem,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ err: "An error occurred while editing the product." });
+  }
+};

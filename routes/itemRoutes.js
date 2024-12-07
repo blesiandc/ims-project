@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", itemController.getAllItems);
 router.get("/addForm", itemController.addForm);
 router.post("/add", itemController.addItem);
-// router.put("/:id", itemController.updateItem);
-// router.get("/:id", itemController.getItem);
+router.get("/:id", itemController.editForm);
+router.put("/:id", itemController.updateItem);
 
 module.exports = router;

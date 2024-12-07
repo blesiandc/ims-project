@@ -3,26 +3,26 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
       <div class="bg-white p-4 rounded shadow w-50">
         <h1 class="text-center mb-4">Edit Product</h1>
-        <form>
+        <form action="/items/<%= item.id %>?_method=PUT" method="POST">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="name" class="form-control" id="name">Bless</input>
+            <input type="text" class="form-control" id="name" name="name" value="<%= item.name %>"></input>
           </div>
           <div class="mb-3">
             <label for="category" class="form-label">Category</label>
-            <input type="category" class="form-control" id="category">
+            <input type="text" class="form-control" id="category" name="category" value="<%= item.category %>">
           </div>
           <div class="mb-3">
             <label for="quantity" class="form-label">Quantity</label>
-            <input type="quantity" class="form-control" id="quantity">
+            <input type="number" class="form-control" id="quantity" name="quantity" value="<%= item.quantity %>">
           </div>
           <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="price" class="form-control" id="price">
+            <input type="number" class="form-control" id="price" name="price" value="<%= item.price %>">
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <input type="description" class="form-control" id="description">
+            <input type="text" class="form-control" id="description" name="description" value="<%= item.description %>">
           </div>
           <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
