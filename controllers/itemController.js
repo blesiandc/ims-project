@@ -18,7 +18,7 @@ exports.addForm = (req, res) => {
   res.render("add");
 };
 
-// Add Product
+// Add Item
 exports.addItem = async (req, res) => {
   const { name, category, quantity, price, description } = req.body;
 
@@ -29,9 +29,7 @@ exports.addItem = async (req, res) => {
       message: "Item created successfully.",
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ err: "An error occurred while adding the product." });
+    res.status(500).json({ err: "An error occurred while adding the item." });
   }
 };
 
@@ -63,8 +61,21 @@ exports.updateItem = async (req, res) => {
       item: updatedItem,
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ err: "An error occurred while editing the product." });
+    res.status(500).json({ err: "An error occurred while editing the item." });
+  }
+};
+
+exports.deleteItem = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const deletedItem = await Items.findByIdAndDelete(id);
+
+    if (!deletedItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.redirect("/items");
+  } catch (err) {
+    res.status(500).json({ err: "An error occurred while deleting the item" });
   }
 };
