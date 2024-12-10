@@ -30,8 +30,12 @@
                         <td class="py-4"><%= item.description %></td>
                         <td class="py-4"><%- moment(item.createdAt).format( 'MM/DD/YYYY') %></td>
                         <td class="py-4">
+
                                 <!-- Edit Button -->
-                                <a href="/items/<%= item.id %>" class="btn btn-info">Edit</a>
+                                <a href="/items/<%= item.id %>" class="btn btn-info">View</a>
+
+                                <!-- Edit Button -->
+                                <a href="/items/<%= item.id %>/edit" class="btn btn-warning">Edit</a>
                                 
                                 <!-- Delete Form -->
                                 <form action="/items/<%= item.id %>?_method=DELETE" method="POST" style="display:inline;">
